@@ -60,6 +60,7 @@ Se crea el archivo .gitignore para indicar que archivos o carpetas excluir al mo
 3. Agregar todos los archivos 
 ```
 git add -A
+git status
 ```
 
 4. Hacer commit al repo remoto
