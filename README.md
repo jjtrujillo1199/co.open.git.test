@@ -32,10 +32,38 @@ git commit -m "Inicio del proyecto"
 ```
 git remote add origin https://github.com/jjtrujillo1199/co.open.git.test.git
 git push -u origin main
+git push origin main
 ```
 (El -u solo envia los archivos que no tienen segumiento por ejemplo los que fueron creados recientemente)
 
 7. Generar historial de comandos
 ```
 history | grep git
+```
+
+# #2 Reto
+
+1.  Crear las Carpetas vendor y node_modules
+```
+mkdir vendor node_modules
+```
+
+2. Crear los archivos dentro de las carpetas 
+```
+touch index.html test.log
+touch vendor/autoload.php
+touch node_modules/index.ts
+touch .gitignore
+```
+Se crea el archivo .gitignore para indicar que archivos o carpetas excluir al momento de hacer push al repo remoto (*) Todos los archivos con la extensión
+
+3. Agregar todos los archivos 
+```
+git add -A
+```
+
+4. Hacer commit al repo remoto
+```
+git commit -m "Excluir archivos y carpetas al momento de hacer push"
+git push origin main
 ```
