@@ -68,3 +68,23 @@ git status
 git commit -m "Excluir archivos y carpetas al momento de hacer push"
 git push origin main
 ```
+
+# #3 Reto
+
+1. Se eliminaron los archivos index y test y las carpetas vendor y node_modules
+
+2. Se valido el estado de los archivos
+```
+git status
+```
+
+3. Inidicaliza el proyecto de node.js
+```
+npm init 
+```
+
+4. Se agregan los nuevos archivos, se hace el commit y push al repo remoto
+```
+git commit -m "Excluir archivos y carpetas al momento de hacer push"
+git push origin main
+```

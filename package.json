@@ -1,0 +1,11 @@
+{
+  "name": "retos-de-git",
+  "version": "1.0.0",
+  "description": "Proyecto para desarrollar retos de git usando node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Juan Jose Trujillo Ch",
+  "license": "ISC"
+}
