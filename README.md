@@ -78,13 +78,72 @@ git push origin main
 git status
 ```
 
-3. Inidicaliza el proyecto de node.js
+3. Inidicalizar el proyecto de node.js y completar la información del package.json
 ```
 npm init 
 ```
 
 4. Se agregan los nuevos archivos, se hace el commit y push al repo remoto
 ```
-git commit -m "Excluir archivos y carpetas al momento de hacer push"
+git add .
+git commit -m "Inicializar el proyecto de Node"
 git push origin main
 ```
+
+# #4 Reto
+
+1.  Ejecutar el siguiente comando para crear la rama development a partir de main y quedar en ella
+```
+git checkout -b development
+```
+'checkout' Permite quedar en la rama development directamente
+
+2. Ejecutar el comando para regresar a la rama main
+```
+git checkout main
+```
+
+3. Se modifica el archivo index en la rama main
+
+4. Ejecutar el comando para guardar temporalmente los cambios en el stash
+```
+git stash
+```
+Se puede definir un nombre al stash con el comando 
+```
+git stash save -m "Nombre del stash"
+```
+
+5. Ejecutar el comando para cambiar a la rama development
+```
+git checkout development
+```
+
+6. Se modifica el archivo index en la rama main
+
+7. Agragar los cambios realizados, realizar commit y push a la rama development
+git add .
+git commit -m "Se creo la rama development a partir de main"
+git push origin development
+
+Al hacer push siempre indicar el nombre de la rama
+
+8. Cambiar a la rama main
+```
+git checkout main
+```
+
+9. Se recuperan los cambio guardados en el staged
+```
+git stash pop
+```
+El comando anterior recupera los ultimos cambios guardados y elimina el stash de la lista
+
+10. Agragar los cambios realizados, realizar commit y push a la rama development
+git add .
+git commit -m "Se modificó la rama main en el archivo index.js"
+git push origin development
+
+
+
+
