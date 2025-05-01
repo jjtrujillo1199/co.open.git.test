@@ -34,7 +34,7 @@ git remote add origin https://github.com/jjtrujillo1199/co.open.git.test.git
 git push -u origin main
 git push origin main
 ```
-(El -u solo envia los archivos que no tienen segumiento por ejemplo los que fueron creados recientemente)
+(El -u envia los archivos que no tienen segumiento por ejemplo los que fueron creados recientemente)
 
 7. Generar historial de comandos
 ```
@@ -87,4 +87,69 @@ npm init
 ```
 git commit -m "Excluir archivos y carpetas al momento de hacer push"
 git push origin main
+<<<<<<< Updated upstream
 ```
+=======
+```
+
+# #4 Reto
+
+1.  Ejecutar el siguiente comando para crear la rama development a partir de main y quedar en ella
+```
+git checkout -b development
+```
+'checkout' Permite quedar en la rama development directamente
+
+2. Ejecutar el comando para regresar a la rama main
+```
+git checkout main
+```
+
+3. Se modifica el archivo index en la rama main
+
+4. Ejecutar el comando para guardar temporalmente los cambios en el stash
+```
+git stash
+git stash list
+```
+Se puede definir un nombre al stash con el comando 
+```
+git stash save -m "Nombre del stash"
+```
+
+5. Ejecutar el comando para cambiar a la rama development
+```
+git checkout development
+```
+
+6. Se modifica el archivo index en la rama main
+
+7. Agragar los cambios realizados, realizar commit y push a la rama development
+```
+git add .
+git commit -m "Se creo la rama development a partir de main"
+git push origin development
+```
+Al hacer push siempre indicar el nombre de la rama
+
+8. Cambiar a la rama main
+```
+git checkout main
+```
+
+9. Se recuperan los cambio guardados en el stash
+```
+git stash pop
+```
+El comando anterior recupera los ultimos cambios guardados y elimina el stash de la lista
+
+10. Agragar los cambios realizados, realizar commit y push a la rama main
+```
+git add .
+git commit -m "Se modificó la rama main en el archivo index.js"
+git push origin main
+```
+
+
+
+>>>>>>> Stashed changes
