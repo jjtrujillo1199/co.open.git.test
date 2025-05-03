@@ -34,7 +34,7 @@ git remote add origin https://github.com/jjtrujillo1199/co.open.git.test.git
 git push -u origin main
 git push origin main
 ```
-(El -u solo envia los archivos que no tienen segumiento por ejemplo los que fueron creados recientemente)
+(El -u envia los archivos que no tienen segumiento por ejemplo los que fueron creados recientemente)
 
 7. Generar historial de comandos
 ```
@@ -108,6 +108,7 @@ git checkout main
 4. Ejecutar el comando para guardar temporalmente los cambios en el stash
 ```
 git stash
+git stash list
 ```
 Se puede definir un nombre al stash con el comando 
 ```
@@ -122,10 +123,11 @@ git checkout development
 6. Se modifica el archivo index en la rama main
 
 7. Agragar los cambios realizados, realizar commit y push a la rama development
+```
 git add .
 git commit -m "Se creo la rama development a partir de main"
 git push origin development
-
+```
 Al hacer push siempre indicar el nombre de la rama
 
 8. Cambiar a la rama main
@@ -133,17 +135,52 @@ Al hacer push siempre indicar el nombre de la rama
 git checkout main
 ```
 
-9. Se recuperan los cambio guardados en el staged
+9. Se recuperan los cambio guardados en el stash
 ```
 git stash pop
 ```
 El comando anterior recupera los ultimos cambios guardados y elimina el stash de la lista
 
-10. Agragar los cambios realizados, realizar commit y push a la rama development
+10. Agragar los cambios realizados, realizar commit y push a la rama main
+```
 git add .
 git commit -m "Se modificó la rama main en el archivo index.js"
+git push origin main
+```
+
+# #5 Reto
+1. Ubicarse en la rama main
+```
+git checkout main
+```
+2. Crear un archivo llamado operaciones.ts agregando una función que permita sumar dos números y retornar el resultado
+```
+touch operaciones.ts
+```
+3. Sin perder el cambio de la rama main y sin hacer commit o push de los cambios, cambiar a la rama development,
+recuperar las modificaciones hechas en el punto 2 asegurandose que los cambios permanezcan disponibles para ser usados en cualquier otra rama
+```
+git stash -u -m "Se crea el archivo operaciones.ts en rama main"
+git checkout development
+git stash apply
+```
+4. Hacer push a la rama development
+```
+git add .
+git commit -m "Creación del archivo operaciones.ts rama development"
 git push origin development
+```
 
-
-
-
+5. Regresar a la rama main, recuperar los cambios. NO se debe hacer commit ni push a la rama main
+```
+git checkout main
+git stash apply stash@{0}
+```
+6. Eliminar el archivo package.json del proyecto
+```
+rm package.json
+```
+7. Recuperar el archivo package.json
+```
+git restore package.json
+```
