@@ -1,4 +1,8 @@
 
-export function sumar(numero1: number, numero2: number): number {
+function sumar(numero1: number, numero2: number): number {
   return numero1 + numero2;
+}
+
+function dividir(numero1: number, numero2: number): number {
+  return numero1 / numero2;
 }
