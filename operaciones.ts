@@ -13,6 +13,6 @@ function dividir(numero1: number, numero2: number): number {
   return numero1 / numero2;
 }
 
-function porcentaje(a, b) {
-  return (a*b)/100;
+function multiplicar(a, b) {
+  return a*b;
 }
