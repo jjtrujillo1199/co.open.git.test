@@ -184,3 +184,84 @@ rm package.json
 ```
 git restore package.json
 ```
+
+
+# #Reto 6
+
+1. Ubicarse en la rama main
+```
+git checkout main
+```
+2. Actualizar el repo remoto en la rama main con los cambios pendientes del reto anterior
+```
+git add -A
+git commit -m "Creación del archivo operaciones.ts rama main"
+git push origin main
+```
+3. Cambiar a la rama development
+```
+git checkout development
+```
+4. Modificar el archivo operaciones.ts para:
+    4.1. Agrega en la primera línea del archivo: console.log('Operaciones Matamáticas');
+    4.2. Cambia el nombre del método suma por opAdd
+    4.3. Agregar un tercer parámetro al método opAdd y que sea tenido en cuenta en la operación
+    4.4. Agregar un nuevo método llamado opLess, que reciba dos parámetros y retorne el valor de la operación de restar los dos parámetros
+
+Se hizo la modificación manualmente en el archivo
+
+5. Actualizar la rama development en el repo remoto
+```
+git add -A
+git commit -m "Modificación del archivo operaciones.ts para agregar nueva función rama development"
+git push origin development
+```
+6. Cambiar a la rama main y modificar el archivo operaciones.ts agregando una operación de división, luego actualizar la rama main con el cambio en el repo remoto 
+```
+git checkout main
+
+git add -A
+git commit -m "Modificación del archivo operaciones.ts para agregar nueva función rama main"
+git push origin main
+```
+
+7. Fusionar los cambios de la rama remota development en la rama local main
+```
+git fetch origin
+git merge origin/development
+git status
+git add :/
+```
+
+git fetch origin Permite obtener los cambio mas recientes desde el repo remoto
+git add :/ permite visualizar cuales fueron los cambios realizados en el merge
+
+8. Actualizar la rama main en el repo remoto
+```
+git add -A
+git commit -m "Modificación de los archivos fusionados en rama main"
+git push origin main
+```
+
+# #Reto 7
+Rama main: El objetivo es recuperar el estado y contenido del archivo operaciones.ts en donde solo tenía el método suma()
+
+## Solución 1
+```
+git reset --soft 869dafb13e5a874d8d2f491940826c747d83cb6d # Recupera el estado del archivo
+git restore --staged operaciones.ts # Devuelve cambios en el stage
+git restore operaciones.ts # Deja el archivo en el estado inicial antes del commit
+
+# Comando adicional para volver al estado inicial, antes del inicio del reto, todos los archivos
+git reset --hard 83e5ac1a304f3628d531a43390b52845e9c2844b
+```
+
+## Solución 2
+```
+# Comando adicional para volver al estado inicial, antes del inicio del reto, todos los archivos
+git reset --hard 869dafb13e5a874d8d2f491940826c747d83cb6d
+```
+
+Cual de las dos es la solución recomendada? eso depende, si estoy seguro de devolver todos los cambios la solución 2 es mejor, pero si debo ir con cuidado para revisar algo en el camino, la solución recomendada es la 1 que es útil cuando hay muchos archivos/cambios en el histórico
+
+Otra diferencia va a ser la conservación del histórico de cambios de GIT, la solución 1 conserva todo el histórico, la solución 2 no
