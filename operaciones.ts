@@ -13,6 +13,10 @@ function dividir(numero1: number, numero2: number): number {
   return numero1 / numero2;
 }
 
-function multiplicar(a, b) {
-  return a*b;
+function multiplicar(a: number, b: number) {
+  try {
+    return a*b;
+  } catch (error) {
+    console.error(`Error en la multiplicación: ${error}`);
+  }
 }
