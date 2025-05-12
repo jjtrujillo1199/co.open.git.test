@@ -1,6 +1,10 @@
-![Logo Open](https://openits.co/wp-content/uploads/2020/07/log-peque.png)
+<p align="center">
+  <img src="https://openits.co/wp-content/uploads/2020/07/log-peque.png" alt="Opentecnologia"><br>
+  <img src="https://img.shields.io/badge/language-JavaScript-yellow" alt="JavaScript Badge">
+  <img src="https://img.shields.io/badge/Tributaria-OPentecnologia-green" alt="JavaScript Badge">
+</p>
 
-# CO.OPEN.GIT.TEST
+# CO.OPEN.GIT.TEST ![JavaScript](https://img.shields.io/badge/Retos-Git-blue)
 
 ## Repositorio para pruebas con GIT y GitHub
 
@@ -265,3 +269,69 @@ git reset --hard 869dafb13e5a874d8d2f491940826c747d83cb6d
 Cual de las dos es la solución recomendada? eso depende, si estoy seguro de devolver todos los cambios la solución 2 es mejor, pero si debo ir con cuidado para revisar algo en el camino, la solución recomendada es la 1 que es útil cuando hay muchos archivos/cambios en el histórico
 
 Otra diferencia va a ser la conservación del histórico de cambios de GIT, la solución 1 conserva todo el histórico, la solución 2 no
+
+## Reto 8
+
+Agrega el siguiente método en el archivo de operaciones en la rama main:
+
+```
+function multiplicar(a, b) {
+    return a*b;
+}
+```
+
+1. Actualiza el cambio en repo remoto (commit y push)
+```
+git add -A
+git commit -m "Modificación del archivo operaciones.ts se agregó método multiplicar rama main"
+git push origin main
+```
+
+Supongamos que el PO del proyecto nos indicó que el método no debía ser ese sino que debía ser el siguiente por lo que debes reemplazar el método multiplicar():
+```
+function porcentaje(a, b) {
+    return (a*b)/100;
+}
+```
+
+2. Actualiza el cambio en repo remoto (commit y push)
+```
+git add -A
+git commit -m "Modificación del archivo operaciones.ts se reemplazó el método multiplicar rama main"
+git push origin main
+```
+
+Nuevamente el PO nos indica que debemos devolver el cambio y dejar solo el método múltiplicar, pero además notas que el método multiplicar() tiene un bug,
+porque generará una excepción si los parámetros a y b no son números, por lo que debes corregirlo
+
+Para corregir el bug deberás tener en cuenta:
+
+1. No puedes usar git checkout <commit>
+2. No puedes usar git reset <commit>
+3. No puedes simplemente modificar el archivo y hacer un nuevo commit, en este caso sería la solución más sencilla pero no esta permitido
+4. Debes buscar otra manera de realizar el cambio, en donde a nivel del histórico de cambios quede registrada (commit) la recuperación del cambio
+5. Soluciona el bug del método multiplicar
+6. Actualiza los cambios en el repo remoto
+7. Mezcla la rama main local en la rama development local y actualiza el repo remoto
+
+Deja registro de todo el proceso
+
+
+3. Se ejecuta el comando el cual permite deshacer el último commit, pero mantiene el historial de los commit
+```
+git revert HEAD
+```
+
+4. Se hace el commit con los cambios realizados y se llevan a la rama remota
+```
+git add -A
+git commit -m "Modificación del archivo operaciones.ts se restauró el método multiplicar rama main"
+git push origin main
+```
+
+5. Me paso a la rama development para hacer merge con la rama local main y se llevan los cambios a la rama remota
+```
+git checkout development
+git merge main
+git push origin development
+```
