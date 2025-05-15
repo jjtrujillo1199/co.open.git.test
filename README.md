@@ -335,3 +335,80 @@ git checkout development
 git merge main
 git push origin development
 ```
+
+# #Reto 9
+
+1. Crea una etiqueta de versión beta 1.0.0-beta con el último commit del proyecto
+```
+git tag -a 1.0.0-beta -m "Versión beta 1.0.0"
+
+git tag -a v1.2 -m "Versión 1.2.0" <commit>
+```
+-a Crea una etiqueta anotada
+
+2. Sube la etiqueta al repositorio remoto
+```
+git push origin 1.0.0-beta
+```
+3. Genera un pequeño release en GitHub basado en esa etiqueta, y márcalo como pre-release
+
+Se realizo directamente en GitHub
+
+4. Comenta para qué sirven las etiquetas en un proyecto, que estándar, patrón o semántica se debe tener en cuenta o se sugiere
+
+- Las etiquetas se utilizas para marcar versiones de lanzamiento en un proyecto.
+- Las etiquetas anotadas son mas usadas porque permiten almacenar metadatos adiconales (Fecha, autor).
+- Permite llevar un control de versiones en el historial de Commit.
+
+Un patrón habitual 'Semantic Versioning' es utilizar números de versión como v1.4.1
+1.El número mayor
+2.El número menor
+3.El número de ruta (Modificaciones muy pequeñas, corrección de errores)
+
+
+5. Comenta para qué sirven los release y pre-release
+
+Release
+- Es la versión final y estable del software o producto.
+- Asegurar que cumple con los requisitos de calidad y con las pruebas finales.
+- Indica que la versión del proyecto lista para ser usada por los usuarios finales.
+
+Pre-release
+- Es una versión previa al lanzamiento oficial, como versiones beta, alpha.
+- Se utiliza para entornos de pruebas.
+
+Listar los tag
+```
+git tag -l
+```
+
+Listar los hash cortos de los commit
+```
+git log --oneline
+```
+
+# Solución Ing. Alex
+Para que sirven las etiquetas:
+Principalmente sirven para identificar un punto de desarrollo determinado en un proyecto y son usadas para identificar versiones del desarrollo
+
+Para que sirven los releases:
+Permiten identificar una publicación oficial de una versión en la plataforma de administración de repositorios (GitHub, GitLab, etc) y pueden incluir archivos binarios como por ejemplo instaladores, archivos de ayuda o archivos anexos requeridos para el proyecto, y son ideales para compartir versiones de desarrollo entre personas/equipos de desarrollo
+
+Para que sirven los prereleases:
+Identifican una publicación aún NO oficial de una versión, por ejemplo versiones alpha, beta o borradores, generalmente los prerelease son usados en ambiente de pruebas (QA), y generalmente incluyen un sufijo indicando el status, por ejemplo -alpha, -beta, -rc1 (rc = release candidate)
+
+| **Elemento**  | **¿Qué marca?**          | **¿Quién lo ve?**      | **¿Para qué sirve?**                |
+|---------------|---------------------------|------------------------|-------------------------------------|
+| **Tag**       | Punto exacto en Git       | Desarrolladores        | Identificar versiones (ej. `v1.0.0`) |
+| **Release**   | Versión oficial en GitHub | Usuarios / Desarrolladores | Publicar cambios y binarios (instaladores, builds, etc.) |
+| **Prerelease**| Versión aún no final      | QA / Testers          | Probar antes de lanzar una versión estable (ej. `v1.0.0-beta`, `v2.0.0-rc1`) |
+
+Patrón Versionamiento Semántico (http://semver.org/spec/v2.0.0.html) es el patrón de versionamiento más común
+
+Pre-release
+alpha   Primera versión temprana, inestable, sujeta a cambios grandes.
+beta    Versión más estable que alpha, pero puede tener errores.
+rc      (release candidate) Candidato a versión final, en fase de pruebas finales.
+dev     Versión de desarrollo. Usada a veces internamente.
+canary  Versión experimental, se usa para pruebas automáticas.
+preview Similar a beta, pero puede incluir características incompletas.
