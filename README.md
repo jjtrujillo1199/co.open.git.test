@@ -265,3 +265,202 @@ git reset --hard 869dafb13e5a874d8d2f491940826c747d83cb6d
 Cual de las dos es la solución recomendada? eso depende, si estoy seguro de devolver todos los cambios la solución 2 es mejor, pero si debo ir con cuidado para revisar algo en el camino, la solución recomendada es la 1 que es útil cuando hay muchos archivos/cambios en el histórico
 
 Otra diferencia va a ser la conservación del histórico de cambios de GIT, la solución 1 conserva todo el histórico, la solución 2 no
+
+## Reto 8
+
+Agrega el siguiente método en el archivo de operaciones en la rama main:
+
+```
+function multiplicar(a, b) {
+    return a*b;
+}
+```
+
+1. Actualiza el cambio en repo remoto (commit y push)
+```
+git add -A
+git commit -m "Modificación del archivo operaciones.ts se agregó método multiplicar rama main"
+git push origin main
+```
+
+Supongamos que el PO del proyecto nos indicó que el método no debía ser ese sino que debía ser el siguiente por lo que debes reemplazar el método multiplicar():
+```
+function porcentaje(a, b) {
+    return (a*b)/100;
+}
+```
+
+2. Actualiza el cambio en repo remoto (commit y push)
+```
+git add -A
+git commit -m "Modificación del archivo operaciones.ts se reemplazó el método multiplicar rama main"
+git push origin main
+```
+
+Nuevamente el PO nos indica que debemos devolver el cambio y dejar solo el método múltiplicar, pero además notas que el método multiplicar() tiene un bug,
+porque generará una excepción si los parámetros a y b no son números, por lo que debes corregirlo
+
+Para corregir el bug deberás tener en cuenta:
+
+1. No puedes usar git checkout <commit>
+2. No puedes usar git reset <commit>
+3. No puedes simplemente modificar el archivo y hacer un nuevo commit, en este caso sería la solución más sencilla pero no esta permitido
+4. Debes buscar otra manera de realizar el cambio, en donde a nivel del histórico de cambios quede registrada (commit) la recuperación del cambio
+5. Soluciona el bug del método multiplicar
+6. Actualiza los cambios en el repo remoto
+7. Mezcla la rama main local en la rama development local y actualiza el repo remoto
+
+Deja registro de todo el proceso
+
+
+3. Se ejecuta el comando el cual permite deshacer el último commit, pero mantiene el historial de los commit
+```
+git revert HEAD
+```
+
+4. Se hace el commit con los cambios realizados y se llevan a la rama remota
+```
+git add -A
+git commit -m "Modificación del archivo operaciones.ts se restauró el método multiplicar rama main"
+git push origin main
+```
+
+5. Me paso a la rama development para hacer merge con la rama local main y se llevan los cambios a la rama remota
+```
+git checkout development
+git merge main
+git push origin development
+```
+
+# #Reto 9
+
+1. Crea una etiqueta de versión beta 1.0.0-beta con el último commit del proyecto
+```
+git tag -a 1.0.0-beta -m "Versión beta 1.0.0"
+
+git tag -a v1.2 -m "Versión 1.2.0" <commit>
+```
+-a Crea una etiqueta anotada
+
+2. Sube la etiqueta al repositorio remoto
+```
+git push origin 1.0.0-beta
+```
+3. Genera un pequeño release en GitHub basado en esa etiqueta, y márcalo como pre-release
+
+Se realizo directamente en GitHub
+
+4. Comenta para qué sirven las etiquetas en un proyecto, que estándar, patrón o semántica se debe tener en cuenta o se sugiere
+
+- Las etiquetas se utilizas para marcar versiones de lanzamiento en un proyecto.
+- Las etiquetas anotadas son mas usadas porque permiten almacenar metadatos adiconales (Fecha, autor).
+- Permite llevar un control de versiones en el historial de Commit.
+
+Un patrón habitual 'Semantic Versioning' es utilizar números de versión como v1.4.1
+1.El número mayor
+2.El número menor
+3.El número de ruta (Modificaciones muy pequeñas, corrección de errores)
+
+
+5. Comenta para qué sirven los release y pre-release
+
+Release
+- Es la versión final y estable del software o producto.
+- Asegurar que cumple con los requisitos de calidad y con las pruebas finales.
+- Indica que la versión del proyecto lista para ser usada por los usuarios finales.
+
+Pre-release
+- Es una versión previa al lanzamiento oficial, como versiones beta, alpha.
+- Se utiliza para entornos de pruebas.
+
+Listar los tag
+```
+git tag -l
+```
+
+Listar los hash cortos de los commit
+```
+git log --oneline
+```
+
+# Solución Ing. Alex
+Para que sirven las etiquetas:
+Principalmente sirven para identificar un punto de desarrollo determinado en un proyecto y son usadas para identificar versiones del desarrollo
+
+Para que sirven los releases:
+Permiten identificar una publicación oficial de una versión en la plataforma de administración de repositorios (GitHub, GitLab, etc) y pueden incluir archivos binarios como por ejemplo instaladores, archivos de ayuda o archivos anexos requeridos para el proyecto, y son ideales para compartir versiones de desarrollo entre personas/equipos de desarrollo
+
+Para que sirven los prereleases:
+Identifican una publicación aún NO oficial de una versión, por ejemplo versiones alpha, beta o borradores, generalmente los prerelease son usados en ambiente de pruebas (QA), y generalmente incluyen un sufijo indicando el status, por ejemplo -alpha, -beta, -rc1 (rc = release candidate)
+
+| **Elemento**  | **¿Qué marca?**          | **¿Quién lo ve?**      | **¿Para qué sirve?**                |
+|---------------|---------------------------|------------------------|-------------------------------------|
+| **Tag**       | Punto exacto en Git       | Desarrolladores        | Identificar versiones (ej. `v1.0.0`) |
+| **Release**   | Versión oficial en GitHub | Usuarios / Desarrolladores | Publicar cambios y binarios (instaladores, builds, etc.) |
+| **Prerelease**| Versión aún no final      | QA / Testers          | Probar antes de lanzar una versión estable (ej. `v1.0.0-beta`, `v2.0.0-rc1`) |
+
+Patrón Versionamiento Semántico (http://semver.org/spec/v2.0.0.html) es el patrón de versionamiento más común
+
+Pre-release
+alpha   Primera versión temprana, inestable, sujeta a cambios grandes.
+beta    Versión más estable que alpha, pero puede tener errores.
+rc      (release candidate) Candidato a versión final, en fase de pruebas finales.
+dev     Versión de desarrollo. Usada a veces internamente.
+canary  Versión experimental, se usa para pruebas automáticas.
+preview Similar a beta, pero puede incluir características incompletas.
+
+
+# #Reto 10
+Asegurate de estar en la rama development:
+```
+git checkout development
+```
+1. Crea un archivo llamado CHANGELOG.md en la raíz del proyecto.
+```
+touch CHANGELOG.md
+```
+2. Investiga cual es el estándar que permite mantener un archivo de cambios y estructura tu archivo siguiendo dicho estándar
+
+Es un archivo que contiene una lista cronológicamente ordenada de los cambios más destacables para cada versión de un proyecto.
+Facilita a los usuarios y colaboradores ver exactamente qué cambios importantes se han realizado entre cada versión del proyecto.
+
+Estandar Keep a Changelog
+Es una estructura que se define para el archivo CHANGELOG.md, el cual permite registrar de forma clara y ordenada los cambios relevantes
+en el desarrollo de un proyecto, con el fin de que cada integrante del equipo comprenda los cambios que va presentando el proyecto.
+
+**Cada versión debería**:
+Indicar su fecha de lanzamiento en el formato anterior.
+Agrupar los cambios para describir su impacto en el proyecto, de la siguiente manera:
+**Added** para funcionalidades nuevas.
+**Changed** para los cambios en las funcionalidades existentes.
+**Deprecated** para indicar que una característica está obsoleta y que se eliminará en las próximas versiones.
+**Removed** para las características en desuso que se eliminaron en esta versión.
+**Fixed** para correcciones y bugs.
+**Security** para invitar a los usuarios a actualizar, en el caso de que haya vulnerabilidades.
+
+Se recomienda mantener un **Unreleased** en la parte superior para realizar un seguimiento de los próximos cambios.
+
+3. A la fecha en nuestros repositorios ya tenemos varios commits, una versión beta y un pre-release en GitHub, si no lo haz hecho debes hacerlo
+4. Crea la versión 1.0.0, crea el release correspondiente en Github, y asegurate de enlazar/agregar esta información al contenido del CHANGELOG
+
+git tag -a v1.0.0 -m "Versión 1.0.0 - Versión estable inicial"
+git push origin v1.0.0 
+
+Se creo el resease en Github
+
+5. Agrega a tu archivo README el significado del archivo changelog, su utilidad y una breve descripción del estándar usado
+
+Se incluyo la información consultada en el README
+
+6. Actualiza todos los cambios en tu repositorio remoto
+```
+git add -A
+git commit -m "Creación del archivo CHANGELOG.md, se creo la versión 1.0.0 con el release en Github"
+git push origin development
+```
+7. Mezcla los cambios realizados en la rama main y asegurate de que esta rama quede actualizada igualmente en el origen
+```
+git checkout main
+git merge development
+git push origin main
+```
