@@ -411,4 +411,59 @@ beta    Versión más estable que alpha, pero puede tener errores.
 rc      (release candidate) Candidato a versión final, en fase de pruebas finales.
 dev     Versión de desarrollo. Usada a veces internamente.
 canary  Versión experimental, se usa para pruebas automáticas.
-preview Similar a beta, pero puede incluir características incompletas.
+
+# #Reto 10
+
+Asegurate de estar en la rama development:
+```
+git checkout development
+```
+1. Crea un archivo llamado CHANGELOG.md en la raíz del proyecto.
+```
+touch CHANGELOG.md
+```
+2. Investiga cual es el estándar que permite mantener un archivo de cambios y estructura tu archivo siguiendo dicho estándar
+
+Es un archivo que contiene una lista cronológicamente ordenada de los cambios más destacables para cada versión de un proyecto.
+Facilita a los usuarios y colaboradores ver exactamente qué cambios importantes se han realizado entre cada versión del proyecto.
+
+Estandar Keep a Changelog
+Es una estructura que se define para el archivo CHANGELOG.md, el cual permite registrar de forma clara y ordenada los cambios relevantes
+en el desarrollo de un proyecto, con el fin de que cada integrante del equipo comprenda los cambios que va presentando el proyecto.
+
+**Cada versión debería**:
+Indicar su fecha de lanzamiento en el formato anterior.
+Agrupar los cambios para describir su impacto en el proyecto, de la siguiente manera:
+**Added** para funcionalidades nuevas.
+**Changed** para los cambios en las funcionalidades existentes.
+**Deprecated** para indicar que una característica está obsoleta y que se eliminará en las próximas versiones.
+**Removed** para las características en desuso que se eliminaron en esta versión.
+**Fixed** para correcciones y bugs.
+**Security** para invitar a los usuarios a actualizar, en el caso de que haya vulnerabilidades.
+
+Se recomienda mantener un **Unreleased** en la parte superior para realizar un seguimiento de los próximos cambios.
+
+3. A la fecha en nuestros repositorios ya tenemos varios commits, una versión beta y un pre-release en GitHub, si no lo haz hecho debes hacerlo
+4. Crea la versión 1.0.0, crea el release correspondiente en Github, y asegurate de enlazar/agregar esta información al contenido del CHANGELOG
+
+git tag -a v1.0.0 -m "Versión 1.0.0 - Versión estable inicial"
+git push origin v1.0.0 
+
+Se creo el resease en Github
+
+5. Agrega a tu archivo README el significado del archivo changelog, su utilidad y una breve descripción del estándar usado
+
+Se incluyo la información consultada en el README
+
+6. Actualiza todos los cambios en tu repositorio remoto
+```
+git add -A
+git commit -m "Creación del archivo CHANGELOG.md, se creo la versión 1.0.0 con el release en Github"
+git push origin development
+```
+7. Mezcla los cambios realizados en la rama main y asegurate de que esta rama quede actualizada igualmente en el origen
+```
+git checkout main
+git merge development
+git push origin main
+```
